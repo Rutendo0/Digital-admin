@@ -7,7 +7,10 @@ const mockDoctors = [
       specialty: 'Cardiology',
       practiceNumber: '12345',
       email: 'sarah.moyo@hospital.com',
-      status: 'verified'
+      status: 'verified',
+      biography: 'Dr. Sarah Moyo is a dedicated cardiologist with over 15 years of experience in cardiovascular medicine. She specializes in interventional cardiology and has performed numerous successful heart surgeries. Her passion for patient care and commitment to advancing cardiac treatments has made her a respected figure in the medical community.',
+      education: 'MBBS from University of Zimbabwe, MD in Cardiology from University of Cape Town, Fellowship in Interventional Cardiology from Harvard Medical School',
+      profilePicture: 'https://fsi9-prod.s3.us-west-1.amazonaws.com/s3fs-public/styles/895x498/public/gettyimages-black_doctor.jpg?h=f2fcf546&itok=KC5yZosp'
     }
   },
   {
@@ -17,7 +20,10 @@ const mockDoctors = [
       specialty: 'Pediatrics',
       practiceNumber: '67890',
       email: 'tendai.ndlovu@hospital.com',
-      status: 'pending'
+      status: 'pending',
+      biography: 'Dr. Tendai Ndlovu is a compassionate pediatrician who has been serving children and families for over 12 years. She is particularly interested in preventive care and childhood development. Her gentle approach and expertise in pediatric medicine have helped countless young patients achieve better health outcomes.',
+      education: 'MBBS from University of Pretoria, Diploma in Child Health from College of Medicine South Africa, Masters in Pediatrics from University of the Witwatersrand',
+      profilePicture: 'https://fsi9-prod.s3.us-west-1.amazonaws.com/s3fs-public/styles/895x498/public/gettyimages-black_doctor.jpg?h=f2fcf546&itok=KC5yZosp'
     }
   },
   {
@@ -27,7 +33,10 @@ const mockDoctors = [
       specialty: 'Orthopedics',
       practiceNumber: '54321',
       email: 'rumbidzai.chitiyo@hospital.com',
-      status: 'verified'
+      status: 'verified',
+      biography: 'Dr. Rumbidzai Chitiyo is an expert orthopedic surgeon with extensive experience in joint replacement and sports medicine. She has successfully treated thousands of patients with musculoskeletal conditions, from professional athletes to elderly patients requiring joint replacements. Her innovative approaches to orthopedic care have improved patient recovery times significantly.',
+      education: 'MBBS from University of Zimbabwe, MS in Orthopedic Surgery from University of Cape Town, Fellowship in Sports Medicine from University of Stellenbosch',
+      profilePicture: 'https://fsi9-prod.s3.us-west-1.amazonaws.com/s3fs-public/styles/895x498/public/gettyimages-black_doctor.jpg?h=f2fcf546&itok=KC5yZosp'
     }
   }
 ];
