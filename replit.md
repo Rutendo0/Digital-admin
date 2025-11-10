@@ -6,6 +6,14 @@ This is a Next.js-based admin dashboard for Parirenyatwa Hospital management. Th
 
 ## Recent Changes
 
+**November 10, 2025** - Updated theme to match Arcus dashboard design
+- Redesigned color scheme with purple accents (#7C3AED) and blue gradients
+- Updated sidebar with purple gradient for active states and light purple/blue header section
+- Redesigned stat cards with blue gradients and white text (Arcus style)
+- Updated header with clean search bar, purple accents, and modern icon layout
+- Added gradient backgrounds to buttons matching Arcus aesthetic
+- Maintained cohesive theme across all components using shared utility classes
+
 **November 10, 2025** - Migrated from Vercel to Replit
 - Configured Next.js to run on port 5000 with host 0.0.0.0 for Replit compatibility
 - Updated package.json scripts for both development and production environments
@@ -30,7 +38,8 @@ Preferred communication style: Simple, everyday language.
 - Uses the new `@tailwindcss/postcss` plugin architecture
 - Custom CSS variables defined in `globals.css` for consistent theming (colors, spacing, sidebar width)
 - Component-level utility classes with custom component classes for reusable UI patterns (buttons, cards, badges)
-- Design system features a hospital-appropriate color scheme with primary (indigo), secondary (green), and accent colors
+- Design system features Arcus-inspired theme with purple accents (#7C3AED), blue gradients, and clean modern aesthetics
+- Purple gradient for active navigation states and blue gradients for stat cards matching Arcus dashboard style
 
 **Component Structure**
 - Layout components: `DashboardLayout`, `Sidebar`, `Header` - provide consistent navigation and structure
