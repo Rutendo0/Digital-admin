@@ -13,198 +13,166 @@ export default function Dashboard() {
     patientsInQueue: 0
   });
 
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [doctors, setDoctors] = useState<any[]>([]);
 
   useEffect(() => {
     loadStats();
   }, []);
 
-  const navigateMonth = (direction: 'prev' | 'next') => {
-    setCurrentDate(prev => {
-      const newDate = new Date(prev);
-      if (direction === 'prev') {
-        newDate.setMonth(newDate.getMonth() - 1);
-      } else {
-        newDate.setMonth(newDate.getMonth() + 1);
-      }
-      return newDate;
-    });
-  };
-
-  const getCalendarDays = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const startDate = new Date(firstDay);
-    startDate.setDate(startDate.getDate() - firstDay.getDay());
-
-    const days = [];
-    const current = new Date(startDate);
-
-    for (let i = 0; i < 42; i++) { // 6 weeks * 7 days
-      days.push(new Date(current));
-      current.setDate(current.getDate() + 1);
-    }
-
-    return days;
-  };
-
-  const isToday = (date: Date) => {
-    const today = new Date();
-    return date.toDateString() === today.toDateString();
-  };
-
-  const isCurrentMonth = (date: Date) => {
-    return date.getMonth() === currentDate.getMonth();
-  };
-
-  const hasAppointment = (date: Date) => {
-    // Mock: assume appointments on 11th and 15th
-    return date.getDate() === 11 || date.getDate() === 15;
-  };
-
   const loadStats = async () => {
-    const doctors = await listDoctors();
+    const doctorsData = await listDoctors();
     const appointments = await listAppointments();
     const queue = await listPatientQueue();
 
+    const uniqueSpecialties = new Set(doctorsData.map((d: any) => d.objectData.specialty));
+    const totalDepartments = uniqueSpecialties.size;
+
+    setDoctors(doctorsData);
     setStats({
-      pendingDoctors: doctors.filter((d: any) => d.objectData.status === 'pending').length,
-      verifiedDoctors: doctors.filter((d: any) => d.objectData.status === 'verified').length,
-      todayAppointments: appointments.length,
-      patientsInQueue: queue.length
+      pendingDoctors: doctorsData.filter((d: any) => d.objectData.status === 'pending').length,
+      verifiedDoctors: doctorsData.filter((d: any) => d.objectData.status === 'verified').length,
+      todayAppointments: totalDepartments,
+      patientsInQueue: totalDepartments
     });
   };
+
+  const recentDoctors = doctors.slice(0, 4);
 
   return (
     <DashboardLayout>
       <div>
-        <h1 className="text-3xl font-bold mb-8">Dashboard Overview</h1>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-[var(--text-primary)]">Admin Management Dashboard</h1>
+          <p className="text-sm text-[var(--text-secondary)]">Comprehensive overview of users, roles, and system administration</p>
+        </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatsCard title="Pending Doctors" value={stats.pendingDoctors} icon="user-check" color="yellow" />
-          <StatsCard title="Verified Doctors" value={stats.verifiedDoctors} icon="shield-check" color="green" />
-          <StatsCard title="Today's Appointments" value={stats.todayAppointments} icon="calendar" color="blue" />
-          <StatsCard title="Patients in Queue" value={stats.patientsInQueue} icon="users" color="purple" />
+          <StatsCard 
+            title="Total Doctors" 
+            value={stats.verifiedDoctors + stats.pendingDoctors} 
+            subtitle={`${stats.verifiedDoctors} verified doctors`}
+            icon="users" 
+            variant="gradient"
+          />
+          <StatsCard 
+            title="Total Roles" 
+            value={stats.verifiedDoctors + stats.pendingDoctors} 
+            subtitle="Across all departments"
+            icon="shield-check" 
+            variant="white"
+          />
+          <StatsCard 
+            title="Departments" 
+            value={stats.todayAppointments} 
+            subtitle="With assigned roles"
+            icon="building" 
+            variant="gradient"
+          />
+          <StatsCard 
+            title="System Activity" 
+            value={stats.patientsInQueue} 
+            subtitle="Active departments"
+            icon="activity" 
+            variant="white"
+          />
         </div>
 
-        {/* Quick Actions */}
+        {/* Doctors by Department & Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <div className="card">
-            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <a href="/doctors" className="btn btn-primary text-center">
-                Review Doctors
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <span className="icon-users text-lg"></span>
+                <h2 className="text-lg font-semibold">Doctors by Department</h2>
+              </div>
+              <a href="/doctors" className="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)]">
+                View All Doctors
               </a>
-              <a href="/appointments" className="btn btn-secondary text-center">
-                View Schedule
-              </a>
-              <a href="/queue" className="btn btn-secondary text-center">
-                Manage Queue
-              </a>
-              <a href="/profile" className="btn btn-outline text-center">
-                View Profile
-              </a>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-sm">Cardiology</p>
+                  <p className="text-xs text-[var(--text-secondary)]">1 unique role</p>
+                </div>
+                <span className="text-sm text-[var(--primary-color)] font-medium">1 doctor</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-sm">Pediatrics</p>
+                  <p className="text-xs text-[var(--text-secondary)]">1 unique role</p>
+                </div>
+                <span className="text-sm text-[var(--primary-color)] font-medium">1 doctor</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-sm">Orthopedics</p>
+                  <p className="text-xs text-[var(--text-secondary)]">1 unique role</p>
+                </div>
+                <span className="text-sm text-[var(--primary-color)] font-medium">1 doctor</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-sm">Emergency</p>
+                  <p className="text-xs text-[var(--text-secondary)]">0 unique roles</p>
+                </div>
+                <span className="text-sm text-[var(--primary-color)] font-medium">0 doctors</span>
+              </div>
             </div>
           </div>
 
-          <div className="card">
-            <div className="flex items-center justify-between mb-4">
-              <button
-                onClick={() => navigateMonth('prev')}
-                className="p-1 hover:bg-gray-100 rounded"
-              >
-                <span className="text-lg">‹</span>
-              </button>
-              <h2 className="text-xl font-semibold">
-                {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </h2>
-              <button
-                onClick={() => navigateMonth('next')}
-                className="p-1 hover:bg-gray-100 rounded"
-              >
-                <span className="text-lg">›</span>
-              </button>
-            </div>
-            <div className="text-center">
-              <div className="grid grid-cols-7 gap-1 text-sm">
-                <div className="font-medium text-[var(--text-secondary)]">Su</div>
-                <div className="font-medium text-[var(--text-secondary)]">Mo</div>
-                <div className="font-medium text-[var(--text-secondary)]">Tu</div>
-                <div className="font-medium text-[var(--text-secondary)]">We</div>
-                <div className="font-medium text-[var(--text-secondary)]">Th</div>
-                <div className="font-medium text-[var(--text-secondary)]">Fr</div>
-                <div className="font-medium text-[var(--text-secondary)]">Sa</div>
-
-                {getCalendarDays().map((date, index) => (
-                  <div
-                    key={index}
-                    className={`h-8 w-8 flex items-center justify-center rounded-full cursor-pointer relative ${
-                      isCurrentMonth(date)
-                        ? isToday(date)
-                          ? 'bg-[var(--primary-color)] text-white font-medium'
-                          : hasAppointment(date)
-                          ? 'bg-blue-100 hover:bg-blue-200'
-                          : 'hover:bg-gray-100'
-                        : 'text-gray-300'
-                    }`}
-                  >
-                    {date.getDate()}
-                    {hasAppointment(date) && isCurrentMonth(date) && (
-                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-[var(--primary-color)] rounded-full"></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-3 text-xs text-[var(--text-secondary)]">
-                <span className="inline-block w-2 h-2 bg-[var(--primary-color)] rounded-full mr-1"></span>
-                Appointments scheduled
-              </div>
+          <div className="card bg-gray-50">
+            <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
+            <div className="space-y-3">
+              <a href="/doctors" className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <span className="icon-users text-lg text-[var(--text-secondary)]"></span>
+                <span className="text-sm font-medium">Manage Doctors</span>
+              </a>
+              <a href="/appointments" className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <span className="icon-calendar text-lg text-[var(--text-secondary)]"></span>
+                <span className="text-sm font-medium">View Appointments</span>
+              </a>
+              <a href="/queue" className="flex items-center gap-3 p-3 bg-white rounded-lg hover:shadow-md transition-shadow">
+                <span className="icon-building text-lg text-[var(--text-secondary)]"></span>
+                <span className="text-sm font-medium">Patient Queue</span>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Recent Activity & Upcoming Appointments */}
+        {/* Recent Doctors & System Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="card">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">New doctor verification request</p>
-                  <p className="text-xs text-[var(--text-secondary)]">5 minutes ago</p>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="icon-users text-lg"></span>
+              <h2 className="text-lg font-semibold">Recent Doctors</h2>
+            </div>
+            <div className="space-y-4">
+              {recentDoctors.map((doctor) => (
+                <div key={doctor.objectId} className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                      <span className="text-white font-bold text-sm">
+                        {doctor.objectData.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">{doctor.objectData.name}</p>
+                      <p className="text-xs text-[var(--text-secondary)]">{doctor.objectData.email}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium">{doctor.objectData.specialty}</p>
+                    <p className="text-xs text-[var(--text-secondary)] capitalize">{doctor.objectData.status}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-[var(--secondary-color)] rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Patient added to queue</p>
-                  <p className="text-xs text-[var(--text-secondary)]">15 minutes ago</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Appointment completed</p>
-                  <p className="text-xs text-[var(--text-secondary)]">1 hour ago</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-[var(--danger-color)] rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">System maintenance completed</p>
-                  <p className="text-xs text-[var(--text-secondary)]">2 hours ago</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="card">
-            <h2 className="text-xl font-semibold mb-4">Upcoming Appointments</h2>
+            <h2 className="text-lg font-semibold mb-4">Upcoming Appointments</h2>
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
