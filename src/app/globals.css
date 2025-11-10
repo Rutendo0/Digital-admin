@@ -1,16 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --primary-color: #4F46E5;
-  --secondary-color: #10B981;
-  --accent-color: #F59E0B;
+  --primary-color: #7C3AED;
+  --primary-light: #A78BFA;
+  --secondary-color: #3B82F6;
+  --accent-color: #10B981;
   --danger-color: #EF4444;
   --bg-primary: #F9FAFB;
   --bg-secondary: #FFFFFF;
   --text-primary: #111827;
   --text-secondary: #6B7280;
   --border-color: #E5E7EB;
-  --sidebar-width: 280px;
+  --sidebar-width: 260px;
+  --purple-gradient-start: #9333EA;
+  --purple-gradient-end: #7C3AED;
+  --blue-gradient-start: #60A5FA;
+  --blue-gradient-end: #3B82F6;
 }
 
 @layer base {
@@ -23,28 +28,34 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply px-4 py-2.5 rounded-lg font-medium transition-all duration-200;
   }
   .btn-primary {
-    @apply bg-[var(--primary-color)] text-white hover:opacity-90;
+    @apply text-white hover:opacity-90;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   }
   .btn-secondary {
-    @apply bg-[var(--secondary-color)] text-white hover:opacity-90;
+    @apply text-white hover:opacity-90;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   }
   .btn-danger {
     @apply bg-[var(--danger-color)] text-white hover:opacity-90;
   }
   .btn-outline {
-    @apply border-2 border-[var(--border-color)] text-[var(--text-primary)] hover:bg-gray-50;
+    @apply border border-[var(--border-color)] text-[var(--text-primary)] hover:bg-gray-50;
   }
   .card {
     @apply bg-[var(--bg-secondary)] rounded-xl shadow-sm border border-[var(--border-color)] p-6;
   }
   .stat-card {
-    @apply bg-[var(--bg-secondary)] rounded-xl shadow-sm border border-[var(--border-color)] p-6 flex items-start gap-4;
+    @apply rounded-xl shadow-sm p-6 text-white relative overflow-hidden;
+    background: linear-gradient(135deg, var(--blue-gradient-start) 0%, var(--blue-gradient-end) 100%);
+  }
+  .stat-card-alt {
+    @apply rounded-xl shadow-sm p-6 bg-white border border-[var(--border-color)];
   }
   .badge {
-    @apply px-3 py-1 rounded-full text-sm font-medium;
+    @apply px-3 py-1 rounded-full text-xs font-medium;
   }
   .badge-pending {
     @apply bg-yellow-100 text-yellow-700;
@@ -54,5 +65,20 @@
   }
   .badge-active {
     @apply bg-blue-100 text-blue-700;
+  }
+  .badge-level-1 {
+    @apply bg-blue-100 text-blue-700;
+  }
+  .badge-level-2 {
+    @apply bg-green-100 text-green-700;
+  }
+  .badge-level-3 {
+    @apply bg-yellow-100 text-yellow-700;
+  }
+  .badge-level-4 {
+    @apply bg-purple-100 text-purple-700;
+  }
+  .badge-level-5 {
+    @apply bg-red-100 text-red-700;
   }
 }
