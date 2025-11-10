@@ -18,15 +18,15 @@ export default function Sidebar({}: SidebarProps) {
   ];
 
   return (
-    <aside className="w-[var(--sidebar-width)] bg-[var(--bg-secondary)] border-r border-[var(--border-color)] flex flex-col">
-      <div className="p-5 bg-gradient-to-br from-purple-50 to-blue-50 m-4 rounded-xl">
+    <aside className="w-[var(--sidebar-width)] bg-[var(--bg-secondary)] border-r border-[var(--border-color)] flex flex-col shadow-lg">
+      <div className="p-5 bg-gradient-to-br from-purple-200 via-purple-200 to-purple-200 m-4 rounded-xl shadow-xl">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg">
-            <div className="icon-hospital text-xl text-white"></div>
+          <div className="w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
+            <div className="icon-hospital text-xl text-gray-700"></div>
           </div>
           <div>
-            <h2 className="font-bold text-base text-gray-800">Parirenyatwa</h2>
-            <p className="text-xs text-gray-600">Admin Portal</p>
+            <h2 className="font-bold text-base text-gray-700">Parirenyatwa</h2>
+            <p className="text-xs text-gray-700">Admin Portal</p>
           </div>
         </div>
       </div>
@@ -38,8 +38,8 @@ export default function Sidebar({}: SidebarProps) {
             href={item.href}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-lg mb-1 transition-all ${
               pathname === item.href
-                ? 'text-white shadow-md'
-                : 'text-[var(--text-secondary)] hover:bg-gray-50'
+                ? 'text-white shadow-lg transform scale-105'
+                : 'text-[var(--text-secondary)] hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 hover:text-[var(--primary-color)]'
             }`}
             style={pathname === item.href ? {
               background: 'linear-gradient(135deg, #9333EA 0%, #7C3AED 100%)'
@@ -51,7 +51,7 @@ export default function Sidebar({}: SidebarProps) {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-[var(--border-color)]">
+      <div className="p-4 border-t border-[var(--border-color)] bg-gradient-to-r from-gray-50 to-purple-50">
         <p className="text-xs text-[var(--text-secondary)] text-center">© 2025 Parirenyatwa Hospital</p>
       </div>
     </aside>

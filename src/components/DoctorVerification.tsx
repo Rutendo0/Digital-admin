@@ -59,11 +59,11 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
 
       {loading ? (
         <div className="card text-center py-12">
-          <p className="text-(--text-secondary)">Loading doctors...</p>
+          <p className="text-[var(--text-secondary)]">Loading doctors...</p>
         </div>
       ) : pendingDoctors.length === 0 ? (
         <div className="card text-center py-12">
-          <p className="text-(--text-secondary)">No pending verifications</p>
+          <p className="text-[var(--text-secondary)]">No pending verifications</p>
         </div>
       ) : (
         <div className="grid gap-6">
@@ -77,16 +77,16 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
                     className="w-14 h-14 rounded-full object-cover flex-shrink-0 border-2 border-gray-200"
                   />
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-xl text-(--text-primary)">{doctor.objectData.name}</h3>
-                    <p className="text-(--text-secondary) font-medium">{doctor.objectData.specialty}</p>
-                    <p className="text-sm text-(--text-secondary) mt-1">
+                    <h3 className="font-bold text-xl text-[var(--text-primary)]">{doctor.objectData.name}</h3>
+                    <p className="text-[var(--text-secondary)] font-medium">{doctor.objectData.specialty}</p>
+                    <p className="text-sm text-[var(--text-secondary)] mt-1">
                       Practice No: {doctor.objectData.practiceNumber}
                     </p>
-                    <p className="text-sm text-(--text-secondary) mt-1">
+                    <p className="text-sm text-[var(--text-secondary)] mt-1">
                       {doctor.objectData.email}
                     </p>
                     <div className="mt-3">
-                      <p className="text-sm text-(--text-secondary)">
+                      <p className="text-sm text-[var(--text-secondary)]">
                         {doctor.objectData.biography.substring(0, 120)}...
                       </p>
                     </div>
@@ -110,7 +110,7 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
         <Modal onClose={() => setSelectedDoctor(null)}>
           <div className="max-h-[80vh] overflow-y-auto bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl">
             {/* Header with gradient background */}
-            <div className="bg-gradient-to-r from-(--primary-color) to-blue-400 text-white p-6 rounded-t-xl">
+            <div className="bg-gradient-to-r from-[var(--primary-color)] to-blue-400 text-white p-6 rounded-t-xl">
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <img
@@ -133,35 +133,35 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
             <div className="p-6">
               <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-6">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-(--primary-color) flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[var(--primary-color)] flex items-center justify-center">
                     <span className="text-white font-bold text-lg">
                       {selectedDoctor.objectData.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-(--text-primary)">{selectedDoctor.objectData.name}</h3>
-                    <p className="text-(--text-secondary) font-medium">{selectedDoctor.objectData.specialty}</p>
+                    <h3 className="text-xl font-bold text-[var(--text-primary)]">{selectedDoctor.objectData.name}</h3>
+                    <p className="text-[var(--text-secondary)] font-medium">{selectedDoctor.objectData.specialty}</p>
                   </div>
                 </div>
                 <div className="space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <span className="text-blue-500 flex-shrink-0">🏥</span>
-                      <span className="text-(--text-secondary) flex-shrink-0">Practice:</span>
+                      <span className="text-[var(--text-secondary)] flex-shrink-0">Practice:</span>
                       <span className="font-medium truncate">{selectedDoctor.objectData.practiceNumber}</span>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <span className="text-green-500 flex-shrink-0">✉️</span>
-                      <span className="text-(--text-secondary) flex-shrink-0">Email:</span>
+                      <span className="text-[var(--text-secondary)] flex-shrink-0">Email:</span>
                       <span className="font-medium truncate">{selectedDoctor.objectData.email}</span>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                     <div className="flex items-center gap-2">
                       <span className="text-purple-500 flex-shrink-0">📋</span>
-                      <span className="text-(--text-secondary) flex-shrink-0">Status:</span>
+                      <span className="text-[var(--text-secondary)] flex-shrink-0">Status:</span>
                       <span className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium flex-shrink-0">Pending Review</span>
                     </div>
                   </div>
@@ -174,10 +174,10 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">📖</span>
-                    <h4 className="text-lg font-bold text-(--text-primary)">Professional Biography</h4>
+                    <h4 className="text-lg font-bold text-[var(--text-primary)]">Professional Biography</h4>
                   </div>
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-(--primary-color)">
-                    <p className="text-(--text-primary) leading-relaxed">{selectedDoctor.objectData.biography}</p>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-[var(--primary-color)]">
+                    <p className="text-[var(--text-primary)] leading-relaxed">{selectedDoctor.objectData.biography}</p>
                   </div>
                 </div>
 
@@ -185,14 +185,14 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">🎓</span>
-                    <h4 className="text-lg font-bold text-(--text-primary)">Education & Qualifications</h4>
+                    <h4 className="text-lg font-bold text-[var(--text-primary)]">Education & Qualifications</h4>
                   </div>
                   <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg border-l-4 border-green-500">
                     <div className="space-y-2">
                       {selectedDoctor.objectData.education.split(', ').map((qualification, index) => (
                         <div key={index} className="flex items-start gap-2">
                           <span className="text-green-500 mt-1">•</span>
-                          <p className="text-(--text-primary)">{qualification}</p>
+                          <p className="text-[var(--text-primary)]">{qualification}</p>
                         </div>
                       ))}
                     </div>
@@ -201,11 +201,11 @@ export default function DoctorVerification({ onUpdate }: { onUpdate: () => void 
 
                 {/* Verification Actions */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
-                  <h4 className="text-lg font-bold text-(--text-primary) mb-4 flex items-center gap-2">
+                  <h4 className="text-lg font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2">
                     <span className="text-2xl">⚖️</span>
                     Verification Decision
                   </h4>
-                  <p className="text-(--text-secondary) mb-6">Please review all information carefully before making your decision.</p>
+                  <p className="text-[var(--text-secondary)] mb-6">Please review all information carefully before making your decision.</p>
 
                   <div className="flex gap-4">
                     <button

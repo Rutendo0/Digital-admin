@@ -56,7 +56,7 @@ export default function Dashboard() {
             variant="gradient"
           />
           <StatsCard 
-            title="Total Roles" 
+            title="Patient in Queue" 
             value={stats.verifiedDoctors + stats.pendingDoctors} 
             subtitle="Across all departments"
             icon="shield-check" 

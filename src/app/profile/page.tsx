@@ -63,10 +63,12 @@ export default function ProfilePage() {
             <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-[var(--primary-color)] flex items-center justify-center">
-                  <span className="text-2xl text-white font-bold">
-                    {profile.name.charAt(0).toUpperCase()}
-                  </span>
+                <div className="w-16 h-16 rounded-full overflow-hidden bg-[var(--primary-color)] flex items-center justify-center">
+                  <img
+                    src="https://news.northeastern.edu/wp-content/uploads/2022/06/060622_MM_Caleb_Gayle_008.jpg?w=1024"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div>
                   {isEditing ? (

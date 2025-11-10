@@ -10,7 +10,7 @@ const mockDoctors = [
       status: 'verified',
       biography: 'Dr. Sarah Moyo is a dedicated cardiologist with over 15 years of experience in cardiovascular medicine. She specializes in interventional cardiology and has performed numerous successful heart surgeries. Her passion for patient care and commitment to advancing cardiac treatments has made her a respected figure in the medical community.',
       education: 'MBBS from University of Zimbabwe, MD in Cardiology from University of Cape Town, Fellowship in Interventional Cardiology from Harvard Medical School',
-      profilePicture: 'https://fsi9-prod.s3.us-west-1.amazonaws.com/s3fs-public/styles/895x498/public/gettyimages-black_doctor.jpg?h=f2fcf546&itok=KC5yZosp'
+      profilePicture: 'https://t3.ftcdn.net/jpg/06/08/67/68/360_F_608676891_y0RHXyTrH80snyzxI3kR9O3wwqvQAo87.jpg'
     }
   },
   {
@@ -36,7 +36,7 @@ const mockDoctors = [
       status: 'verified',
       biography: 'Dr. Rumbidzai Chitiyo is an expert orthopedic surgeon with extensive experience in joint replacement and sports medicine. She has successfully treated thousands of patients with musculoskeletal conditions, from professional athletes to elderly patients requiring joint replacements. Her innovative approaches to orthopedic care have improved patient recovery times significantly.',
       education: 'MBBS from University of Zimbabwe, MS in Orthopedic Surgery from University of Cape Town, Fellowship in Sports Medicine from University of Stellenbosch',
-      profilePicture: 'https://fsi9-prod.s3.us-west-1.amazonaws.com/s3fs-public/styles/895x498/public/gettyimages-black_doctor.jpg?h=f2fcf546&itok=KC5yZosp'
+      profilePicture: 'https://thumbs.dreamstime.com/b/portrait-black-female-african-doctor-sitting-portrait-black-female-african-doctor-sitting-working-hospital-169415053.jpg'
     }
   }
 ];
